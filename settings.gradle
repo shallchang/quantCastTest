@@ -2,6 +2,6 @@ rootProject.name = 'quantcast'
 
 include 'usecase'
 include 'domain'
-include 'adaptor:controller'
-include 'adaptor:repository'
+include 'controller'
+include 'repository'
 

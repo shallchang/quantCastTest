@@ -1,9 +1,14 @@
 package com.quantcast.activecookie.domain;
 
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+import java.time.LocalDate;
+
+@Data
+@AllArgsConstructor
 public class Cookie {
 
-    private String uuid;
-    private Date date;
+    private String id;
+    private LocalDate date;
 }
