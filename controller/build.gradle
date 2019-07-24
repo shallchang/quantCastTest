@@ -2,5 +2,11 @@ group 'quantcast'
 version '1.0-SNAPSHOT'
 
 dependencies {
+    compile project(':repository')
+    compile project(':usecase')
+    compile project(':domain')
+    compile project(':adaptor')
+    compile 'org.apache.poi:poi:3.9'
+    compile 'org.apache.poi:poi-ooxml:3.9'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }

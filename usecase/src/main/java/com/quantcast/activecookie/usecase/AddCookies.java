@@ -33,6 +33,10 @@ public class AddCookies {
                 dailyCookies.add(cookie);
             }
         }
+        if(!dailyCookies.isEmpty()){
+            List<Cookie> mostActiveCookies = findDailyMostActiveCookies(dailyCookies);
+            mostActiveCookies.forEach(c -> repository.add(c));
+        }
 
         return true;
     }
