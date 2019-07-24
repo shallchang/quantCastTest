@@ -1,2 +1,3 @@
 #!/bin/bash
-echo "Hey"
+echo "Start of the bash script."
+java -jar

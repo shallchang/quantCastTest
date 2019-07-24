@@ -1,14 +1,8 @@
-plugins {
-    id 'java'
-}
-
-group 'usecase'
+group 'quantcast'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
-
 dependencies {
-    compile project(':repository')
+    compile project(':domain')
     compile 'org.apache.poi:poi:3.9'
     compile 'org.apache.poi:poi-ooxml:3.9'
 }
