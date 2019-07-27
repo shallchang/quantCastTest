@@ -1,3 +1,9 @@
 #!/bin/bash
 echo "Start of the bash script."
-java -jar
+FILE_NAME="$1"
+OPT="$2"
+DATE="$3"
+case $OPT in
+    -d)
+        java -jar build/libs/quantcast-1.0-SNAPSHOT.jar $FILE_NAME $DATE
+esac

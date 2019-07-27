@@ -3,8 +3,13 @@ apply plugin: 'java'
 group 'quantcast'
 version '1.0-SNAPSHOT'
 
-repositories {
-    mavenCentral()
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'com.quantcast.activecookie.Main'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
 
 allprojects {

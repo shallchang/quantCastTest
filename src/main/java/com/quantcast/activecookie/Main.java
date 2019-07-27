@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[]args){
         ExcelMostActiveCookieController controller = new ExcelMostActiveCookieController();
-        List<String> mostActiveCookies = controller.findMostActiveCookieByDate(new File("/users/xiaohanzhang/Documents/test.xlsx"), LocalDate.of(2018, 12, 9));
+        List<String> mostActiveCookies = controller.findMostActiveCookieByDate(new File(args[0]), LocalDate.parse(args[1]));
 
         mostActiveCookies.forEach(System.out::println);
     }
