@@ -1,5 +1,6 @@
 package com.quantcast.activecookie.controller;
 
+import com.quantcast.activecookie.controller.exception.FilePathInvalidException;
 import com.quantcast.activecookie.domain.Cookie;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +32,13 @@ public class ExcelCookieReaderTest {
         expectedCookies.add(new Cookie("SAZuXPGUrfbcn5UA", LocalDate.of(2018, 12, 9)));
 
         assertTrue(cookies.containsAll(expectedCookies));
+    }
+
+    @Test(expected = FilePathInvalidException.class)
+    public void testShouldThrowFilePathInvalidException(){
+        File file = new File("unknown.xlsx");
+
+        reader.read(file);
     }
 
 }

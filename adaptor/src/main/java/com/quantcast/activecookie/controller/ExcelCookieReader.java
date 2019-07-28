@@ -1,5 +1,6 @@
 package com.quantcast.activecookie.controller;
 
+import com.quantcast.activecookie.controller.exception.FilePathInvalidException;
 import com.quantcast.activecookie.domain.Cookie;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -7,6 +8,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -38,7 +40,9 @@ public class ExcelCookieReader implements CookieReader{
             }
 
             file.close();
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            throw new FilePathInvalidException(String.format("File path %s cannot be found.", filePath.toString()));
+        } catch (Exception e){
             e.printStackTrace();
         }
         return cookies;

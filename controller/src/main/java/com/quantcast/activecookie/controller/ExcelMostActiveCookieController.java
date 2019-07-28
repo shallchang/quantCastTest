@@ -9,6 +9,7 @@ import com.quantcast.activecookie.usecase.FindMostActiveCookie;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public class ExcelMostActiveCookieController {
 
@@ -27,6 +28,10 @@ public class ExcelMostActiveCookieController {
     public List<String> findMostActiveCookieByDate(File filePath, LocalDate date){
         List<Cookie> cookies = reader.read(filePath);
         addCookiesUseCase.add(cookies);
-        return findMostActiveCookieUseCase.findByDate(date).get();
+        Optional<List<String>> mostActiveCookies = findMostActiveCookieUseCase.findByDate(date);
+        if(mostActiveCookies.isPresent()){
+            return mostActiveCookies.get();
+        }
+        throw new NoCookieFoundException("No Cookie Found in Date Passed");
     }
 }

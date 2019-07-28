@@ -1,4 +1,5 @@
 import com.quantcast.activecookie.controller.ExcelMostActiveCookieController;
+import com.quantcast.activecookie.controller.NoCookieFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,5 +34,38 @@ public class ExcelMostActiveCookieControllerTest {
 
         assertTrue(cookies.containsAll(expectedCookies));
 
+    }
+
+    @Test
+    public void testFindMostActiveCookieByDateSingleResult(){
+        File file = new File(getClass().getClassLoader().getResource("cookie_file2.xlsx").getFile());
+        LocalDate date = LocalDate.of(2018, 12, 9);
+        List<String> cookies = controller.findMostActiveCookieByDate(file, date);
+
+        List<String> expectedCookies = new ArrayList<>();
+        expectedCookies.add("AtY0laUfhglK3lC7");
+
+        assertTrue(cookies.containsAll(expectedCookies));
+    }
+
+    @Test
+    public void testFindMostActiveCookieByDateMultipleResults(){
+        File file = new File(getClass().getClassLoader().getResource("cookie_file2.xlsx").getFile());
+        LocalDate date = LocalDate.of(2018, 12, 8);
+        List<String> cookies = controller.findMostActiveCookieByDate(file, date);
+
+        List<String> expectedCookies = new ArrayList<>();
+        expectedCookies.add("SAZuXPGUrfbcn5UA");
+        expectedCookies.add("4sMM2LxV07bPJzwf");
+        expectedCookies.add("fbcn5UAVanZf6UtG");
+
+        assertTrue(cookies.containsAll(expectedCookies));
+    }
+
+    @Test(expected = NoCookieFoundException.class)
+    public void testShouldThrowNoCookieFoundException(){
+        File file = new File(getClass().getClassLoader().getResource("cookie_file2.xlsx").getFile());
+        LocalDate date = LocalDate.of(2019, 7, 22);
+        List<String> cookies = controller.findMostActiveCookieByDate(file, date);
     }
 }
